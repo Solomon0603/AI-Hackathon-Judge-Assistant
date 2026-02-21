@@ -22,13 +22,14 @@ Clone the repo:
 git clone https://github.com/YOUR_USERNAME/AI-Hackathon-Judge-Assistant.git
 ```
 Install dependencies:
-
+```bash
 pip install -r requirements.txt
-
+```
 Set API key:
-
+```bash
 set GOOGLE_API_KEY=your_api_key
-
+```
 Run:
-
+```bash
 python Projeval.py
+```
