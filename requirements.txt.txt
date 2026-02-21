@@ -1,4 +1,0 @@
-gradio
-google-genai
-PyMuPDF
-Pillow
