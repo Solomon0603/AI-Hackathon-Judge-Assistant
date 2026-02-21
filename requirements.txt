@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 gradio
 google-genai
 PyMuPDF
+=======
+gradio
+google-genai
+PyMuPDF
+>>>>>>> 60ead122dba0062753cb648c063e5211bce9b90b
 Pillow
