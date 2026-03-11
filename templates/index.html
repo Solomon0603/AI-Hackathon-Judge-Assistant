@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Hackathon Judge Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="icon" href="/static/favicon.ico" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-header">
+      <div class="logo-mark">
+        <span class="logo-orb"></span>
+        <span class="logo-text">AI Judge</span>
+      </div>
+      <nav class="header-nav">
+        <span class="nav-pill">Hackathon Tools</span>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="hero-card surface-elevated">
+        <div class="hero-copy">
+          <div class="eyebrow">AI Evaluation</div>
+          <h1>AI Hackathon Judge Assistant</h1>
+          <p class="subtitle">
+            Upload your project details and let an AI judge simulate expert review.
+            Get feedback on clarity, innovation, feasibility, and user impact in seconds.
+          </p>
+        </div>
+
+        <form id="analysis-form" class="layout-grid" autocomplete="off">
+          <div class="field-group">
+            <label for="description" class="field-label">
+              Project description
+              <span class="label-hint">What did you build, why, and how?</span>
+            </label>
+            <div class="textarea-shell surface-subtle">
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Explain your hackathon project as if you were pitching it to a judge. Include problem, solution, tech stack, and what makes it unique."
+                rows="5"
+                required
+              ></textarea>
+              <div class="textarea-footer">
+                <span class="hint">Shift + Enter for new line</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group uploads-column">
+            <div class="upload-stack">
+              <label class="field-label">
+                Screenshot
+                <span class="label-hint">Optional • PNG / JPG</span>
+              </label>
+              <div
+                id="screenshot-drop"
+                class="dropzone surface-subtle"
+                data-input-id="image"
+              >
+                <div class="dropzone-inner">
+                  <div class="dropzone-icon dropzone-icon-image"></div>
+                  <div class="dropzone-text">
+                    <div class="primary">Drag & drop UI screenshot</div>
+                    <div class="secondary">or click to browse</div>
+                  </div>
+                  <div class="dropzone-chip" id="image-chip">No file selected</div>
+                </div>
+                <input
+                  id="image"
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  class="dropzone-input"
+                />
+              </div>
+            </div>
+
+            <div class="upload-stack">
+              <label class="field-label">
+                Project PDF
+                <span class="label-hint">Optional • Deck or spec</span>
+              </label>
+              <div
+                id="pdf-drop"
+                class="dropzone surface-subtle"
+                data-input-id="pdf"
+              >
+                <div class="dropzone-inner">
+                  <div class="dropzone-icon dropzone-icon-pdf"></div>
+                  <div class="dropzone-text">
+                    <div class="primary">Drag & drop project PDF</div>
+                    <div class="secondary">or click to browse</div>
+                  </div>
+                  <div class="dropzone-chip" id="pdf-chip">No file selected</div>
+                </div>
+                <input
+                  id="pdf"
+                  type="file"
+                  name="pdf"
+                  accept=".pdf"
+                  class="dropzone-input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <button
+              type="submit"
+              id="analyze-button"
+              class="primary-button"
+            >
+              <span class="button-glow-layer"></span>
+              <span class="button-label">
+                <span class="button-spinner" aria-hidden="true"></span>
+                <span class="button-text">Analyze Project</span>
+              </span>
+            </button>
+
+            <p class="inline-meta">
+              The AI judge will simulate evaluation criteria such as
+              <span class="pill-meta">innovation</span>,
+              <span class="pill-meta">clarity</span>,
+              <span class="pill-meta">technical depth</span>, and
+              <span class="pill-meta">user impact</span>.
+            </p>
+          </div>
+        </form>
+      </section>
+
+      <section id="result-panel" class="result-card surface-elevated" aria-live="polite">
+        <div class="result-header">
+          <span class="result-label">AI evaluation</span>
+          <div class="result-status">
+            <span id="result-status-text" class="status-text">Waiting for input</span>
+          </div>
+        </div>
+        <div id="result-body" class="result-body is-empty">
+          <div class="result-grid">
+            <div class="result-metrics">
+              <div class="metric-card" id="innovation-card">
+                <div class="metric-label-row">
+                  <span class="metric-label">Innovation</span>
+                  <span class="metric-score" id="innovation-score">–</span>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-bar-fill" id="innovation-bar"></div>
+                </div>
+              </div>
+              <div class="metric-card" id="technical-card">
+                <div class="metric-label-row">
+                  <span class="metric-label">Technical</span>
+                  <span class="metric-score" id="technical-score">–</span>
+                </div>
+                <div class="metric-bar">
+                  <div class="metric-bar-fill" id="technical-bar"></div>
+                </div>
+              </div>
+            </div>
+            <div class="result-analysis">
+              <div class="analysis-label-row">
+                <span class="analysis-label">AI judge feedback</span>
+              </div>
+              <div id="analysis-typing" class="analysis-typing">
+                <p class="result-placeholder">
+                  Your AI judge feedback will appear here as soon as you submit a project.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span class="footer-text">
+        Built for hackathon teams • Powered by your FastAPI backend
+      </span>
+    </footer>
+  </div>
+
+  <div id="page-loader" class="page-loader">
+    <div class="page-loader-orbit">
+      <div class="page-loader-core"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
