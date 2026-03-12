@@ -37,6 +37,13 @@ Libraries
 
 ---
 
+## Demo
+
+![Interface](screenshots/interface.png)
+
+![Evaluation](screenshots/evaluation.png)
+
+
 ## ▶️ Run Locally
 
 Clone the repository
