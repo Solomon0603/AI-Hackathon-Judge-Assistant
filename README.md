@@ -41,13 +41,12 @@ Libraries
 
 ![Interface](screenshots/interface.png)
 
-![Evaluation](screenshots/evaluation.png)
+![Evaluation Result](screenshots/evaluation.png)
 
 
 ## ▶️ Run Locally
 
 Clone the repository
-
 
 ---
 
