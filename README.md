@@ -1,50 +1,59 @@
-# AI Hackathon Judge Assistant
+# 🤖 AI Hackathon Judge Assistant
 
-AI-powered web application that simulates hackathon judging using generative AI.
+An AI-powered web application that simulates the hackathon judging process.
 
-## Features
+The system evaluates a project by analyzing its description, screenshot, and documentation and generates innovation and technical scores along with feedback.
 
-• Upload project description  
-• Upload project screenshot  
-• Upload project documentation (PDF)  
-• AI evaluation and scoring  
-• Feedback similar to real hackathon judges  
+---
 
-## Tech Stack
+## 🚀 Features
 
-Backend  
-- Python  
-- FastAPI  
+- Upload project description
+- Upload project screenshot
+- Upload project PDF documentation
+- AI-generated evaluation
+- Innovation & technical scoring
+- Automated judge feedback
 
-AI  
-- Google Gemini API  
+---
 
-Frontend  
-- HTML  
-- CSS  
-- JavaScript  
+## 🛠 Tech Stack
 
-Other Tools  
-- PyMuPDF  
+Backend
+- Python
+- FastAPI
 
-## Installation
+AI
+- Google Gemini API
+
+Frontend
+- HTML
+- CSS
+- JavaScript
+
+Libraries
+- PyMuPDF
+- Jinja2
+
+---
+
+## Demo
+
+![Interface](screenshots/interface.png)
+
+![Evaluation](screenshots/evaluation.png)
+
+
+## ▶️ Run Locally
 
 Clone the repository
 
-git clone https://github.com/yourusername/AI-Hackathon-Judge-Assistant.git
 
-Install dependencies
+---
 
-pip install -r requirements.txt
+## 📌 Future Improvements
 
-Run the server
-
-python -m uvicorn main:app --reload
-
-Open in browser
-
-http://127.0.0.1:8000
-
-## Usage
-
-Upload a project description, screenshot, and documentation to receive an AI-generated evaluation report.
+- Multiple judging categories
+- Real-time score visualization
+- Multi-judge consensus system
+- Deployment on cloud
