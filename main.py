@@ -1,8 +1,12 @@
+from typing import Optional
+import io
+from PIL import Image
+
 from fastapi import FastAPI, Request, UploadFile, File, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from google import genai
-import fitz
+import pymupdf as fitz
 import os
 
 app = FastAPI()
@@ -24,12 +28,16 @@ def home(request: Request):
 @app.post("/analyze")
 async def analyze(
     description: str = Form(...),
-    image: UploadFile = File(...),
-    pdf: UploadFile = File(...)
+    image: Optional[UploadFile] = File(None),
+    pdf: Optional[UploadFile] = File(None)
 ):
     try:
 
-        pdf_text = extract_text(await pdf.read())
+        pdf_text = ""
+        if pdf is not None and getattr(pdf, "filename", None):
+            pdf_bytes = await pdf.read()
+            if pdf_bytes:
+                pdf_text = extract_text(pdf_bytes)
 
         prompt = f"""
 You are an experienced hackathon judge.
@@ -47,14 +55,22 @@ Then give a short feedback paragraph.
 
 Project Description:
 {description}
-
-Project Document:
-{pdf_text[:2000]}
 """
+
+        if pdf_text:
+            prompt += f"""\nProject Document:\n{pdf_text[:2000]}\n"""
+
+        contents = [prompt]
+
+        if image is not None and getattr(image, "filename", None):
+            image_bytes = await image.read()
+            if image_bytes:
+                img_obj = Image.open(io.BytesIO(image_bytes))
+                contents.append(img_obj)
 
         response = client.models.generate_content(
             model="models/gemini-2.5-flash",
-            contents=prompt
+            contents=contents
         )
 
         result_text = response.text
